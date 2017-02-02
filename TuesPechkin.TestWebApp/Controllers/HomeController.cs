@@ -7,16 +7,16 @@ namespace TuesPechkin.TestWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static IDeployment specificPath = 
-            new StaticDeployment(
-                Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory,
-                    "../TuesPechkin.Tests/wk-ver/0.12.3"));
+        //private static IDeployment specificPath = 
+        //    new StaticDeployment(
+        //        Path.Combine(
+        //            AppDomain.CurrentDomain.BaseDirectory,
+        //            "../TuesPechkin.Tests/wk-ver/0.12.3"));
 
-        private static string randomPath = Path.Combine(
-            Path.GetTempPath(),
-            Guid.NewGuid().ToString(),
-            "wkhtmltox.dll");
+        //private static string randomPath = Path.Combine(
+        //    Path.GetTempPath(),
+        //    Guid.NewGuid().ToString(),
+        //    "wkhtmltox.dll");
 		TempFolderDeployment tfd = new TempFolderDeployment();
 
         private static IConverter converter =
@@ -25,16 +25,16 @@ namespace TuesPechkin.TestWebApp.Controllers
 					new WinAnyCPUEmbeddedDeployment(
                         new TempFolderDeployment())));
 
-        private static IConverter anotherConverter =
-            new ThreadSafeConverter(
-                new RemotingToolset<PdfToolset>(
-                    specificPath));
+     //   private static IConverter anotherConverter =
+     //       new ThreadSafeConverter(
+     //           new RemotingToolset<PdfToolset>(
+     //               specificPath));
 
-        private static IConverter imageConverter =
-            new ThreadSafeConverter(
-                new RemotingToolset<ImageToolset>(
-					new WinAnyCPUEmbeddedDeployment(
-                        new TempFolderDeployment())));
+     //   private static IConverter imageConverter =
+     //       new ThreadSafeConverter(
+     //           new RemotingToolset<ImageToolset>(
+					//new WinAnyCPUEmbeddedDeployment(
+     //                   new TempFolderDeployment())));
 
         // GET: /Home/
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace TuesPechkin.TestWebApp.Controllers
         public ActionResult PdfTest()
         {
             var doc = new HtmlToPdfDocument();
-            doc.Objects.Add(new ObjectSettings { PageUrl = "www.google.com " });
+            doc.Objects.Add(new ObjectSettings { PageUrl = "www.jd.com " });
        
             for (var i = 0; i < 5; i++)
             {
@@ -59,47 +59,47 @@ namespace TuesPechkin.TestWebApp.Controllers
             return this.View();
         }
 
-        [HttpGet]
-        public FileResult ScratchPad()
-        {
-            var doc = new HtmlToPdfDocument();
-            var obj = new ObjectSettings();
+        //[HttpGet]
+        //public FileResult ScratchPad()
+        //{
+        //    var doc = new HtmlToPdfDocument();
+        //    var obj = new ObjectSettings();
 
-            obj.PageUrl = Url.Action("PostAnything", "Home", routeValues: null, protocol: Request.Url.Scheme);
-            obj.LoadSettings.CustomHeaders.Add("X-MY-HEADER", "my value");
-            obj.LoadSettings.Cookies.Add("my_awesome_cookie", "cookie value");
-            obj.LoadSettings.PostItems.Add(new PostItem 
-            { 
-                Name = "my_special_value", 
-                Value = "is an amazing value" 
-            });
+        //    obj.PageUrl = Url.Action("PostAnything", "Home", routeValues: null, protocol: Request.Url.Scheme);
+        //    obj.LoadSettings.CustomHeaders.Add("X-MY-HEADER", "my value");
+        //    obj.LoadSettings.Cookies.Add("my_awesome_cookie", "cookie value");
+        //    obj.LoadSettings.PostItems.Add(new PostItem 
+        //    { 
+        //        Name = "my_special_value", 
+        //        Value = "is an amazing value" 
+        //    });
 
-            doc.Objects.Add(obj);
+        //    doc.Objects.Add(obj);
 
-            var result = anotherConverter.Convert(doc);
+        //    var result = anotherConverter.Convert(doc);
 
-            return File(result, "application/pdf");
-        }
+        //    return File(result, "application/pdf");
+        //}
 
         public ActionResult PostAnything()
         {
             return View();
         }
 
-        [HttpGet]
-        public FileResult ImageTest()
-        {
-            var doc = new HtmlToImageDocument() 
-            { 
-                In = "www.google.com", 
-                Format = "jpg", 
-                ScreenWidth = 500, 
-                ScreenHeight = 500
-            };
+        //[HttpGet]
+        //public FileResult ImageTest()
+        //{
+        //    var doc = new HtmlToImageDocument() 
+        //    { 
+        //        In = "www.google.com", 
+        //        Format = "jpg", 
+        //        ScreenWidth = 500, 
+        //        ScreenHeight = 500
+        //    };
 
-            var result = imageConverter.Convert(doc);
+        //    var result = imageConverter.Convert(doc);
 
-            return File(result, "image/jpeg");
-        }
+        //    return File(result, "image/jpeg");
+        //}
     }
 }

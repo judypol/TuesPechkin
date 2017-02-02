@@ -102,9 +102,14 @@ namespace TuesPechkin.Tests
 
             result = converter.Convert(Document(StringObject()));
 
-            Assert.IsNotNull(result);
+            using (var fs = new FileStream("test.pdf", FileMode.Create))
+            {
+                fs.Write(result, 0, result.Length);
+            }
 
-            result = converter.Convert(Document(StringObject()));
+                Assert.IsNotNull(result);
+
+            //result = converter.Convert(Document(StringObject()));
 
             Assert.IsNotNull(result);
         }

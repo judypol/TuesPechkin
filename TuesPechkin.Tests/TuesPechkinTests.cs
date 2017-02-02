@@ -9,7 +9,7 @@ namespace TuesPechkin.Tests
     [TestClass]
     public abstract class TuesPechkinTests
     {
-        protected const string TEST_WK_VER = "0.12.2";
+        protected const string TEST_WK_VER = "0.12.4";
         protected const string TEST_URL = "www.google.com";
 
         // Simulates 1.x.x
@@ -69,6 +69,7 @@ namespace TuesPechkin.Tests
         protected HtmlToPdfDocument Document(params ObjectSettings[] objects)
         {
             var doc = new HtmlToPdfDocument();
+            
             doc.Objects.AddRange(objects);
 
             return doc;
@@ -76,9 +77,14 @@ namespace TuesPechkin.Tests
 
         protected ObjectSettings StringObject()
         {
-            var html = GetResourceString("TuesPechkin.Tests.Resources.page.html");
-
-            return new ObjectSettings { HtmlText = html };
+            //var html = GetResourceString("TuesPechkin.Tests.Resources.page.html, 我是中文");
+            var html = "<h1>我是中文</h1>";
+            return new ObjectSettings { HtmlText = html, HeaderSettings = new HeaderSettings { CenterText = "这是中文" } ,
+                WebSettings =new WebSettings {
+                    DefaultEncoding="utf-8"
+            } };
+            //return new ObjectSettings { PageUrl = "http://www.baidu.com",HeaderSettings=new HeaderSettings { CenterText="这是中文"}
+            //};
         }
 
         protected ObjectSettings UrlObject()
