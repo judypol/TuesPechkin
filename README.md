@@ -6,7 +6,7 @@ and it supports the .net core 1.0.1 in the TuesPechkin.Core folder
 
 ### Supported usage
 - It supports .NET 2.0+, 32 and 64-bit processes, and IIS-hosted applications. 
-- It supports .net core 1.0.1(the linux is only x64),and test it in windows 7/windows 10,Ubuntu14.04.
+- It supports .net core 1.0.1(the linux is only x64),and test it in windows 7/windows 10,Ubuntu14.04.in linux OS you should copy the chinese fonts to the /usr/share/fonts/chinese/truetype
 - [Azure Websites does not currently support the use of wkhtmltopdf.](http://social.msdn.microsoft.com/Forums/windowsazure/en-US/eb48e701-8c0b-4be3-b694-2e11cc6ff2e1/wkhtmltopdf-in-windows-azure?forum=windowsazurewebsitespreview)
 - It is not tested with any operating systems besides Windows.
 - [It is available as a *NuGet package* for your convenience.](https://www.nuget.org/packages/TuesPechkin/)
